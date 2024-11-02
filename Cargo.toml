@@ -1,0 +1,16 @@
+[package]
+name = "TemplateNameShoulbeChanged"
+version = "0.1.0"
+edition = "2021"
+
+## uncomment this for release build, improve runtime perf
+# log = { version = "*", features = ["max_level_debug", "release_max_level_warn"] }
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
+[dependencies]
+bevy = { version = "^0.14.0", features = ["dynamic_linking"] }

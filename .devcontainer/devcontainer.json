@@ -1,0 +1,33 @@
+{
+    "name": "TemplateNameShoulbeChanged",
+    "privileged": true,
+    "containerUser": "dev",
+    "updateRemoteUserUID": true,
+    "dockerFile": "DockerFile",
+    "workspaceMount": "source=${localWorkspaceFolder}/,target=/home/dev/TemplateNameShoulbeChanged,type=bind",
+    "workspaceFolder": "/home/dev/TemplateNameShoulbeChanged",
+    "hostRequirements": {
+        "gpu": true
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash"
+            },
+            "extensions": [
+                "rust-lang.rust-analyzer",
+                "tamasfe.even-better-toml",
+                "ms-azuretools.vscode-docker"
+            ]
+        }
+    },
+    "postStartCommand": "cargo install -f cargo-binutils",
+    "runArgs": [
+        "--net", "host", 
+        "-e", "DISPLAY=${env:DISPLAY}", 
+        "-e", "XDG_RUNTIME_DIR=/mnt/wslg/runtime-dir",
+        "-v", "/tmp/.X11-unix:/tmp/.X11-unix",
+        "--shm-size=4gb",
+        "--gpus=all"
+    ]
+}
